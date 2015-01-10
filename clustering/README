@@ -1,0 +1,49 @@
+Instructions:
+This program will take weighted vectors in Euclidean space and cluster them (the output is the set of k centroids).
+
+----------------------------
+
+Before clustering data, we need data.  The following shell script will take care of this.
+
+Run:
+./buildData.sh -f 4
+
+----------------------------
+
+Now we can compile the program.
+
+Run:
+mpicc -std=c99 kMeansPlusPlus.c -o cluster
+
+----------------------------
+
+Run the program.
+
+Run:
+mpirun -np 5 cluster 5
+
+The command line argument of 5 signifies k (i.e. to use 5 clusters).
+
+The optimal centers are approximately* at (-500, 0, 0), (-250, 0, 0), (0, 0, 0), (250, 0, 0), (500, 0, 0)
+* only approximately, since the data is randomly generated
+
+Example output: (note that centroids do not come in any particular order)
+  Centroid 1 x-value: -0.195217 y = -0.302741 z = -0.803969
+  Centroid 2 x-value: 500.013184 y = -0.822536 z = -0.449899
+  Centroid 3 x-value: -500.936920 y = -0.419298 z = -0.314180
+  Centroid 4 x-value: -250.971481 y = -0.521424 z = -0.591360
+  Centroid 5 x-value: 250.029480 y = -0.594582 z = -0.384687
+  Runtime: 110822 microseconds
+
+----------------------------
+
+If you would like to get average runtimes for various values of k and P, I have written a script.
+
+Run:
+./clusterTester.sh
+
+This runs a total of hundreds of trials and will take several minutes to complete.
+
+----------------------------
+
+End of File
